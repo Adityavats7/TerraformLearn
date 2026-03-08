@@ -1,19 +1,29 @@
-output "instance_id" {
+output "vpc_id" {
+  value       = module.vpc.vpc_id
+  description = "VPC ID"
+}
+
+output "public_subnet_ids" {
+  value       = module.vpc.public_subnet_ids
+  description = "Public subnet IDs"
+}
+
+output "ec2_instance_id" {
+  value       = module.ec2.instance_id
   description = "EC2 instance ID"
-  value       = aws_instance.this.id
 }
 
-output "public_ip" {
-  description = "Public IP of the instance"
-  value       = aws_instance.this.public_ip
+output "ec2_public_ip" {
+  value       = module.ec2.public_ip
+  description = "EC2 Public IP"
 }
 
-output "ssh_command" {
-  description = "SSH command (requires a key pair if you add key_name)"
-  value       = "ssh ec2-user@${aws_instance.this.public_ip}"
+output "ec2_public_dns" {
+  value       = module.ec2.public_dns
+  description = "EC2 Public DNS"
 }
 
-output "ssm_connect_hint" {
-  description = "Command to start SSM session (AWS CLI v2 required)"
-  value       = "aws ssm start-session --target ${aws_instance.this.id}"
+output "ec2_http_url" {
+  value       = "http://${module.ec2.public_ip}"
+  description = "URL to test NGINX"
 }
