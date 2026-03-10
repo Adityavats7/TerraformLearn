@@ -29,7 +29,7 @@ module "ec2" {
   tags             = merge(var.tags, { Name = "${var.tags["Project"]}-web-1" })
 }
 module "s3_bucket" {
-  source = "./modules/s3-bucket"
+  source = "./modules/S3_creation"
 
   bucket_name         = var.s3_bucket_name
   environment         = var.environment
