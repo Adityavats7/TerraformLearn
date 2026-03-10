@@ -4,7 +4,7 @@ locals {
 
 resource "aws_s3_bucket" "this" {
   bucket = local.full_bucket_name
-  tags   = merge(var.tags, {
+  tags = merge(var.tags, {
     Name = local.full_bucket_name
   })
 }
