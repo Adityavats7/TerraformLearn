@@ -7,8 +7,8 @@ variable "region" {
 # SWITCH to map for stable addressing (no index churn)
 # Keys are stable names; values are CIDRs.
 variable "public_subnets" {
-  type        = map(string)
-  default     = {
+  type = map(string)
+  default = {
     public-a = "10.0.1.0/24"
     public-b = "10.0.2.0/24"
   }
@@ -16,14 +16,14 @@ variable "public_subnets" {
 }
 
 variable "vpc_cidr" {
-  type        = string
-  default     = "10.0.0.0/16"
+  type    = string
+  default = "10.0.0.0/16"
 }
 
 # Optional: specify AZs; otherwise, auto-pick first N.
 variable "azs" {
-  type        = list(string)
-  default     = []
+  type    = list(string)
+  default = []
 }
 
 # Networking future-proof toggles
@@ -35,8 +35,8 @@ variable "enable_ipv6" {
 
 # EC2
 variable "instance_type" {
-  type        = string
-  default     = "t3.micro"
+  type    = string
+  default = "t3.micro"
 }
 
 variable "key_name" {
@@ -72,8 +72,8 @@ variable "ingress_ssh_cidr" {
 
 # Global tags (provider.default_tags will propagate)
 variable "tags" {
-  type        = map(string)
-  default     = {
+  type = map(string)
+  default = {
     Project = "ProjectSwing"
     Env     = "dev"
     Owner   = "Aditya"

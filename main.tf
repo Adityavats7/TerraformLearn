@@ -12,28 +12,28 @@ locals {
 }
 
 module "vpc" {
-  source          = "./modules/vpc-creation"
-  vpc_cidr        = var.vpc_cidr
-  public_subnets  = var.public_subnets
-  azs             = var.azs
-  tags            = var.tags
+  source         = "./modules/vpc-creation"
+  vpc_cidr       = var.vpc_cidr
+  public_subnets = var.public_subnets
+  azs            = var.azs
+  tags           = var.tags
 }
 
 module "ec2" {
-  source            = "./modules/ec2_creation"
-  vpc_id            = module.vpc.vpc_id
- subnet_id     = module.vpc.public_subnet_ids["public-a"]
-  instance_type     = var.instance_type
-  key_name          = local.effective_key_name
-  ingress_ssh_cidr  = var.ingress_ssh_cidr
-  tags              = merge(var.tags, { Name = "${var.tags["Project"]}-web-1" })
+  source           = "./modules/ec2_creation"
+  vpc_id           = module.vpc.vpc_id
+  subnet_id        = module.vpc.public_subnet_ids["public-a"]
+  instance_type    = var.instance_type
+  key_name         = local.effective_key_name
+  ingress_ssh_cidr = var.ingress_ssh_cidr
+  tags             = merge(var.tags, { Name = "${var.tags["Project"]}-web-1" })
 }
 module "s3_bucket" {
   source = "./modules/s3-bucket"
 
-  bucket_name        = var.s3_bucket_name
-  environment        = var.environment
-  enable_versioning  = true
+  bucket_name         = var.s3_bucket_name
+  environment         = var.environment
+  enable_versioning   = true
   block_public_access = true
 
   tags = merge(var.tags, {
