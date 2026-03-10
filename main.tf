@@ -28,3 +28,15 @@ module "ec2" {
   ingress_ssh_cidr  = var.ingress_ssh_cidr
   tags              = merge(var.tags, { Name = "${var.tags["Project"]}-web-1" })
 }
+module "s3_bucket" {
+  source = "./modules/s3-bucket"
+
+  bucket_name        = var.s3_bucket_name
+  environment        = var.environment
+  enable_versioning  = true
+  block_public_access = true
+
+  tags = merge(var.tags, {
+    Service = "storage"
+  })
+}
